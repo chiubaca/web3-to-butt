@@ -41,13 +41,15 @@ function handleText(textNode) {
   textNode.nodeValue = v;
 }
 
-//
-if (window.location.host === "twitter.com") {
-  function tick() {
+document.addEventListener("DOMContentLoaded", (event) => {
+  // hack for twitter to make it continuously scan
+  if (window.location.hostname === "twitter.com") {
+    function tick() {
+      walk(document.body);
+      window.requestAnimationFrame(tick);
+    }
+    tick();
+  } else {
     walk(document.body);
-    window.requestAnimationFrame(tick);
   }
-  tick();
-} else {
-  walk(document.body);
-}
+});
