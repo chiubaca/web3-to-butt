@@ -42,14 +42,15 @@ function handleText(textNode) {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  // hack for twitter to make it continuously scan
-  if (window.location.hostname === "twitter.com") {
-    function tick() {
+  walk(document.body);
+
+  // run when mouse moves
+  document.addEventListener("mousemove", (event) => {
+    console.log("mouse move");
+
+    // hack for twitter to make it continuously scan
+    if (window.location.hostname === "twitter.com") {
       walk(document.body);
-      window.requestAnimationFrame(tick);
     }
-    tick();
-  } else {
-    walk(document.body);
-  }
+  });
 });
